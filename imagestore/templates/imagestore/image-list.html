@@ -1,15 +1,13 @@
-{% load i18n %}
-{% load thumbnail %}
-
-<div id="image-thumbnails">
-    {% for image in image_list %}
-        {% thumbnail image.image "120x120" crop="center" as im %}
-                <a class="thumb" rel='gallery-image[ilist]' href="{{ image.get_absolute_url }}">
+{% load i18n thumbnail %}
+<ul class="thumbnails">
+    {% for image in image_list %}<li>
+        {% thumbnail image.image "160x120" crop="center" as im %}
+                <a class="thumbnail" rel='gallery-image[ilist]' href="{{ image.get_absolute_url }}">
                     <img class="preview" {% if image.title %} alt="{{ image.title }}" {% endif %} src="{{ im.url }}">
                 </a>
         {% endthumbnail %}
-    {% endfor %}
+        </li>{% endfor %}
     {% include "imagestore/pagination.html" %}
-</div>
+</ul>
 
 
