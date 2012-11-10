@@ -32,12 +32,10 @@
     {% include "imagestore/pagination.html" %}
     <ul class="thumbnails">{% for album in album_list %}
         {% if album.get_head  or album.user == request.user %}
-            <div class='thumbnail'>
-                <a href="{{ album.get_absolute_url }}">
+            <li class='thumbnail'>
                     {% if album.get_head %}
                         {% thumbnail album.get_head.image "260x180" crop='center' as album_head %}
-                            <img class="preview" {% if album.name %} alt="{{ album.name }}" {% endif %}
-                                 src="{{ album_head.url }}">
+                <a href="{{ album.get_absolute_url }}"><img class="preview" {% if album.name %} alt="{{ album.name }}" {% endif %}src="{{ album_head.url }}"></a>
                         {% endthumbnail %}
                     {% else %}
                         [{% trans "Empty album" %}]
@@ -46,8 +44,7 @@
                     {% if not view_user and IMAGESTORE_SHOW_USER %}
                     <p>{% trans "user" %}: {{ album.user.username }}</p>
                     {% endif %}
-                </a>
-            </div>
+            </li>
         {% endif %}
     {% endfor %}</ul>
     {% include "imagestore/pagination.html" %}

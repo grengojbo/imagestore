@@ -4,7 +4,6 @@
     <div class="well sidebar-nav" id="controls">
         <ul class="nav nav-list">
             <li class="nav-header">{% trans "Gallery" %}</li>
-            <li class="active"><a href="#">Link</a></li>
             {% if imagestore_perms.add_image or request.user.is_superuser %}
                 <li><a href={% url imagestore:upload %}>{% trans "Upload image" %}</a></li>
             {% endif %}
