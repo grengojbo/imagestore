@@ -25,6 +25,16 @@
                     <h3>{{ album.name }}</h3>
                     {% if not view_user and IMAGESTORE_SHOW_USER %}
                     <p>{% trans "user" %}: {{ album.user.username }}</p>
+                    <div class="btn-toolbar">
+      <div class="btn-group">
+      <a href="#" class="btn btn-inverse disabled"><i class="icon-white icon-thumbs-up"></i></a>
+      <a href="#" class="btn btn-inverse disabled"><i class="icon-white icon-heart"></i></a>
+      <a href="{{ album.get_absolute_url }}" rel="tooltip" data-original-title="Просмотреть альбом" class="btn btn-inverse"><i class="icon-white icon-share-alt"></i></a>
+  </div>
+  <div class="btn-group">
+      <a href="#" class="btn btn-danger pd" rel="tooltip" data-content="And here's some amazing content. It's very engaging. right?" title="Удалить альбом"><i class="icon-white icon-trash"></i></a>
+  </div>
+</div>
                     {% endif %}
             </li>
         {% endif %}
