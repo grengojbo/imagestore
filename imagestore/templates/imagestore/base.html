@@ -1,5 +1,26 @@
 {% extends IMAGESTORE_TEMPLATE|default:"base.html" %}
-{% load i18n %}
+{% load i18n static %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/prettyPhoto.css' %}" type="text/css" media="screen" charset="utf-8" />{% endblock %}
+{% block extrajs %}
+    <script src="{% static 'js/jquery.prettyPhoto.js' %}" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+        var prettyparams = {
+            animation_speed: 'fast',
+            slideshow: 3000,
+            autoplay_slideshow: false,
+            opacity: 0.7,
+            show_title: true,
+            allow_resize: true,
+            default_width: 1000,
+            default_height: 344,
+            counter_separator_label: '/',
+            theme: 'facebook',
+            overlay_gallery: true,
+            changepicturecallback: function() {$pp_overlay.css({'height':$(document).height()})}
+            };
+        $(function(){$("a[rel^='gallery-image']").prettyPhoto(prettyparams)});
+    </script>
+{% endblock %}
 {% block sidebar %}
     <div class="well sidebar-nav" id="controls">
         <ul class="nav nav-list">

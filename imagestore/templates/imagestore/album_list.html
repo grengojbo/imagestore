@@ -32,7 +32,7 @@
       <a href="{{ album.get_absolute_url }}" rel="tooltip" data-original-title="Просмотреть альбом" class="btn btn-inverse"><i class="icon-white icon-share-alt"></i></a>
   </div>
   <div class="btn-group">
-      <a href="#" class="btn btn-danger pd" rel="tooltip" data-content="And here's some amazing content. It's very engaging. right?" title="Удалить альбом"><i class="icon-white icon-trash"></i></a>
+      <a href="{% url imagestore:delete-album album.id %}" class="btn btn-danger pd" rel="tooltip" data-content="And here's some amazing content. It's very engaging. right?" title="Удалить альбом"><i class="icon-white icon-trash"></i></a>
   </div>
 </div>
                     {% endif %}
