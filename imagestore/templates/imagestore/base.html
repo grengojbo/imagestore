@@ -2,6 +2,9 @@
 {% load i18n static %}
 {% block css %}<link rel="stylesheet" href="{% static 'css/prettyPhoto.css' %}" type="text/css" media="screen" charset="utf-8" />{% endblock %}
 {% block extrajs %}
+<!--
+            theme: 'facebook',
+-->
     <script src="{% static 'js/jquery.prettyPhoto.js' %}" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" charset="utf-8">
         var prettyparams = {
@@ -14,7 +17,6 @@
             default_width: 1000,
             default_height: 344,
             counter_separator_label: '/',
-            theme: 'facebook',
             overlay_gallery: true,
             changepicturecallback: function() {$pp_overlay.css({'height':$(document).height()})}
             };

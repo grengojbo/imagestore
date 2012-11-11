@@ -25,12 +25,13 @@
     {% include "imagestore/pagination.html" %}
     <ul class="thumbnails">{% for image in image_list %}
         <li class='thumbnail'>
+            {% thumbnail image.image "800" as big %}
             {% thumbnail image.image "160x120" crop="center" as im %}
-                <a rel='gallery-image[ilist]' href="{% include "imagestore/image-href.html" %}">
+            <a rel='gallery-image[ilist]' href="{{ big.url }}">
                     <img class="preview" {% if image.title %} alt="{{ image.title }}" {% endif %} src="{{ im.url }}">
                 </a>
                 {% if image.title %}<p>{{ image.title }}</p>{% endif %}
-
+            {% endthumbnail %}
             {% endthumbnail %}
         </li>
     {% endfor %}
