@@ -1,17 +1,8 @@
 {% load i18n thumbnail %}
-<div class="user-info">
-    <h2>{% trans "User" %}</h2>
-    <div class="avatar">
-            <a href="{{ profile.get_absolute_url }}">
-            {% thumbnail profile.avatar "80x80" as avatar %}
-                <img src="{{ avatar.url }}" alt="avatar">
+<li class="nav-header">{% trans "User" %}</li>
+    <li><a href="{{ profile.get_absolute_url }}">{{ profile.user.username }}</a>
+        <a href="{{ profile.get_absolute_url }}">{% thumbnail profile.avatar "80x80" as avatar %}
+            <img src="{{ avatar.url }}" alt="avatar">
             {% empty %}
-            {% endthumbnail %}
-            </a>
-    </div>
-    <div class="user-name">
-        <a href="{{ profile.get_absolute_url }}">
-            {{ profile.user.username }}
-        </a>
-    </div>
- </div>
+        {% endthumbnail %}</a>
+</li>
