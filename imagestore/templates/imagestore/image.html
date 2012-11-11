@@ -1,12 +1,6 @@
 {% extends "imagestore/base.html" %}
-{% load i18n %}
-{% load thumbnail %}
-{% load tagging_tags %}
-
-{% block title %}
-    {% trans "Image" %} - {{ image.title }}
-{% endblock %}
-
+{% load i18n thumbnail tagging_tags %}
+{% block title %}{% trans "Image" %} - {{ image.title }}{% endblock %}
 {% block imagestore-breadcrumb %}
     {% if view_user and IMAGESTORE_SHOW_USER %}
         <li class='scope-view-user'><a href="{% url imagestore:user-images username=view_user.username %}">{% trans "User" %}: {{ view_user.username }}</a> <span class="divider">/</span></li>
@@ -71,15 +65,7 @@
 {% endblock %}
 
 {% block imagestore-related %}
-
-     <div class="tagging">
-            <h2>{% trans "Tags" %}</h2>
-            {% tags_for_object image as itags %}
-            {% for tag in itags %}
-                <a href="{% url imagestore:tag tag.name %}">{{ tag.name }}</a>
-            {% endfor %}
-     </div>
-     {% if image.place %}
+{% if image.place %}
          <div class='place'>
             <h2>{% trans "Place" %}</h2>
             <a href="{{ image.place.get_absolute_url }}">{{ image.place.name }} →</a>
