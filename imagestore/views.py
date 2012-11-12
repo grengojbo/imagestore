@@ -1,3 +1,4 @@
+# -*- mode: python; coding: utf-8; -*-
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.utils.decorators import method_decorator
