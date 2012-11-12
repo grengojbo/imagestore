@@ -68,7 +68,7 @@ class ImagestoreNode(ImagestoreNodeBase):
         #    thumbnail = DummyImageFile(geometry)
         #elif album_:
         if album_:
-            thumbnail = Image.get_slider(album_, limits, **options)
+            thumbnail = Image.objects.filter(album__id=album_)[:int(limits)]
         else:
             return self.nodelist_empty.render(context)
         context.push()

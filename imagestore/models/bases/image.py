@@ -61,9 +61,6 @@ class BaseImage(models.Model):
         except ThumbnailError, ex:
             return 'ThumbnailError, %s' % ex.message
 
-    def get_slider(self, album, limits, **kwargs):
-        return self.filter(album__id=album)
-
     admin_thumbnail.short_description = _('Thumbnail')
     admin_thumbnail.allow_tags = True
 
