@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# vim:fileencoding=utf-8
-
+# -*- mode: python; coding: utf-8; -*-
 __author__ = 'zeus'
-
 
 from django.db import models
 from django.db.models import permalink

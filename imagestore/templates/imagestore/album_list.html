@@ -41,3 +41,8 @@
     {% endfor %}</ul>
     {% include "imagestore/pagination.html" %}
 {% endblock %}
+{% block imagestore-related %}
+    {% if imagestore_perms.add_album or request.user.is_superuser %}
+        <a href={% url imagestore:create-album %}>{% trans "Create new album" %}</a>
+    {% endif %}
+{% endblock %}
