@@ -10,9 +10,11 @@ class InlineImageAdmin(AdminInlineImageMixin, admin.TabularInline):
     extra = 0
 
 class AlbumAdmin(admin.ModelAdmin):
+    # TODO: добавить действие публиковать, отменить публикацию
     fieldsets = ((None, {'fields': ['name', 'user', 'is_public', 'order']}),)
-    list_display = ('name', 'admin_thumbnail','user', 'created', 'updated', 'is_public', 'order')
+    list_display = ('name', 'admin_thumbnail', 'user', 'created', 'updated', 'is_public', 'order')
     list_editable = ('order', )
+    list_filter = ('is_public', )
     inlines = [InlineImageAdmin]
 
 admin.site.register(Album, AlbumAdmin)

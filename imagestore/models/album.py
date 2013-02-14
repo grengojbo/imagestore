@@ -11,6 +11,6 @@ class Album(BaseAlbum):
 
     class Meta(BaseAlbum.Meta):
         abstract = False
-        verbose_name = _('Album')
-        verbose_name_plural = _('Albums')
+        verbose_name = _(u'Album')
+        verbose_name_plural = _(u'Albums')
         app_label = 'imagestore'
