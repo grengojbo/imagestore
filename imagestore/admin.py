@@ -1,3 +1,4 @@
+# -*- mode: python; coding: utf-8; -*-
 from django.contrib import admin
 from imagestore.models import Image, Album, AlbumUpload
 from sorl.thumbnail.admin import AdminImageMixin, AdminInlineImageMixin

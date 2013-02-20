@@ -1,3 +1,4 @@
+# -*- mode: python; coding: utf-8; -*-
 from django.conf.urls.defaults import *
 from tagging.models import Tag
 from views import AlbumListView, ImageListView, UpdateImage, UpdateAlbum, CreateImage, CreateAlbum, DeleteImage, DeleteAlbum, ImageView
