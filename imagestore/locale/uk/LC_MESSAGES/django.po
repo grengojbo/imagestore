@@ -3,13 +3,14 @@
 # Pavel Zhukov <gelios@gmail.com> 2010
 # 
 # Translators:
+# Jack <Wasd2007@meta.ua>, 2013.
 #  <oleg.dolya@gmail.com>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: imagestore\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-18 12:34+0400\n"
-"PO-Revision-Date: 2013-02-20 11:38+0000\n"
+"PO-Revision-Date: 2013-02-22 20:03+0000\n"
 "Last-Translator: jbo <oleg.dolya@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/imagestore/language/uk/)\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +21,7 @@ msgstr ""
 
 #: forms.py:18 models.py:95 models/bases/image.py:40
 msgid "Description"
-msgstr "Описание"
+msgstr "Опис"
 
 #: models.py:38 models.py:102 imagestore_cms/cms_plugins.py:13
 #: imagestore_cms/models.py:12 imagestore_cms/models.py:15 models/album.py:14
@@ -31,31 +32,31 @@ msgstr "Альбом"
 
 #: models.py:39 models/album.py:15
 msgid "Albums"
-msgstr "Альбомы"
+msgstr "Альбоми"
 
 #: models.py:45 models.py:99 models/bases/album.py:36 models/bases/image.py:44
 #: templates/imagestore/image-scope.html:4 templates/imagestore/image.html:12
 #: templates/imagestore/user_info.html:5
 msgid "User"
-msgstr "Пользователь"
+msgstr "Користувач"
 
 #: models.py:46 models/bases/album.py:37
 msgid "Name"
-msgstr "Имя"
+msgstr "Им'я"
 
 #: models.py:47 models.py:100 models/bases/album.py:38
 #: models/bases/image.py:45
 msgid "Created"
-msgstr "Создано"
+msgstr "Створено"
 
 #: models.py:48 models.py:101 models/bases/album.py:39
 #: models/bases/image.py:46
 msgid "Updated"
-msgstr "Обновлено"
+msgstr "Оновлено"
 
 #: models.py:49 models/bases/album.py:40
 msgid "Is public"
-msgstr "Публичный"
+msgstr "Публічний"
 
 #: models.py:52 models.py:97 models/bases/album.py:43 models/bases/image.py:42
 msgid "Order"
@@ -64,28 +65,28 @@ msgstr "Порядок"
 #: models.py:79 models/bases/album.py:70
 #: templates/imagestore/album_list.html:53
 msgid "Empty album"
-msgstr "Пустой альбом"
+msgstr "Пустий альбом"
 
 #: models.py:81 models/bases/album.py:72
 msgid "Head"
-msgstr "Обложка"
+msgstr "Обкладинка"
 
 #: models.py:87 models/image.py:13 templates/imagestore/image.html:7
 msgid "Image"
-msgstr "Изображение"
+msgstr "Зображення"
 
 #: models.py:88 models/image.py:14
 msgid "Images"
-msgstr "Изображения"
+msgstr "Зображення"
 
 #: models.py:94 models/bases/image.py:39
 msgid "Title"
-msgstr "Название"
+msgstr "Назва"
 
 #: models.py:96 models/bases/image.py:41 templates/imagestore/image.html:76
 #: templates/imagestore/tag-cloud.html:6
 msgid "Tags"
-msgstr "Метки"
+msgstr "Мітки"
 
 #: models.py:98 models/bases/image.py:43
 msgid "File"
@@ -93,7 +94,7 @@ msgstr "Файл"
 
 #: models.py:119 models/bases/image.py:64
 msgid "Thumbnail"
-msgstr "Эскиз"
+msgstr "Ескіз"
 
 #: models.py:123 templates/imagestore/image.html:84
 msgid "Place"
@@ -101,46 +102,46 @@ msgstr "Место"
 
 #: models.py:131 models/upload.py:26
 msgid "images file (.zip)"
-msgstr "файл с изображениями (.zip)"
+msgstr "файл із зображеннями (.zip)"
 
 #: models.py:132 models/upload.py:27
 msgid "Select a .zip file of images to upload into a new Gallery."
-msgstr "Выберите .zip файл с изображениями"
+msgstr "Виберіть .zip файл із зображеннями"
 
 #: models.py:135 models/upload.py:32
 msgid ""
 "Select an album to add these images to. leave this empty to create a new "
 "album from the supplied title."
-msgstr "Выберите альбом, что-бы добавить эти изображения к нему. Оставьте это поле пустым, что-бы создать новый альбом"
+msgstr "Виберіть альбом, щоб додати до нього зображення. Залиште поле вільним, щоб створити новий альбом"
 
 #: models.py:137 models/upload.py:37
 msgid "New album name"
-msgstr "Название нового альбома"
+msgstr "Назва нового альбому"
 
 #: models.py:138 models/upload.py:40
 msgid "tags"
-msgstr "метки"
+msgstr "мітки"
 
 #: models.py:141 models/upload.py:43
 msgid "Album upload"
-msgstr "Загрузка альбома"
+msgstr "Завантаження альбому"
 
 #: models.py:142 models/upload.py:44
 msgid "Album uploads"
-msgstr "Загрузка альбомов"
+msgstr "Завантаження альбомів"
 
 #: views.py:55
 #, python-format
 msgid "No Tag found matching \"%s\"."
-msgstr "Нет тэгов совпадающих с \"%s\"."
+msgstr "Немає тегів співпадаючих з \"%s\"."
 
 #: imagestore_cms/cms_app.py:11
 msgid "Imagestore App"
-msgstr "Imagestore приложение"
+msgstr "Imagestore додаток"
 
 #: imagestore_cms/cms_plugins.py:24
 msgid "Album as carousel"
-msgstr "Альбомы как карусель"
+msgstr "Альбоми як карусель"
 
 #: imagestore_cms/models.py:16
 msgid "Skin"
@@ -148,19 +149,19 @@ msgstr "Тема"
 
 #: imagestore_cms/models.py:17
 msgid "Image limit"
-msgstr "Ограничить изображения"
+msgstr "Обмежити зображення"
 
 #: imagestore_cms/models.py:18
 msgid "Thumbnail size"
-msgstr "Размер эскиза"
+msgstr "Розмір ескізу"
 
 #: imagestore_cms/models.py:19
 msgid "Full size view"
-msgstr "Просмотреть полный размер"
+msgstr "Переглянути повний розмір"
 
 #: imagestore_cms/models.py:20
 msgid "Template file"
-msgstr "Файл шаблона"
+msgstr "Файл шаблону"
 
 #: models/upload.py:38
 msgid ""
