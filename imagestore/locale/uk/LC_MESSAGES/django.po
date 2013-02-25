@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: imagestore\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-18 12:34+0400\n"
-"PO-Revision-Date: 2013-02-25 09:51+0000\n"
+"PO-Revision-Date: 2013-02-25 11:43+0000\n"
 "Last-Translator: jbo <oleg.dolya@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/imagestore/language/uk/)\n"
 "MIME-Version: 1.0\n"
@@ -183,27 +183,27 @@ msgstr "Нет, верните меня назад"
 #: templates/imagestore/image_confirm_delete.html:11
 #: templates/imagestore/image_delete.html:11
 msgid "Yes, I am sure"
-msgstr "Да, я уверен"
+msgstr "Так, я впевнений"
 
 #: templates/imagestore/album_list.html:7
 #: templates/imagestore/album_list.html:16
 #: templates/imagestore/album_list.html:37
 msgid "Albums for user"
-msgstr "Альбомы пользователя"
+msgstr "Альбоми користувача"
 
 #: templates/imagestore/album_list.html:9
 #: templates/imagestore/album_list.html:18
 #: templates/imagestore/album_list.html:39
 msgid "All albums"
-msgstr "Все альбомы"
+msgstr "Всі альбоми"
 
 #: templates/imagestore/album_list.html:60
 msgid "user"
-msgstr "пользователь"
+msgstr "користувач"
 
 #: templates/imagestore/base.html:13
 msgid "Home"
-msgstr "Главная"
+msgstr "Головна"
 
 #: templates/imagestore/base.html:16 templates/imagestore/tag.html:7
 msgid "Gallery"
@@ -214,66 +214,66 @@ msgstr "Галерея"
 #: templates/imagestore/forms/image_form.html:22
 #: templates/imagestore/forms/image_form.html:26
 msgid "Upload image"
-msgstr "Загрузить изображение"
+msgstr "Завантажити зображення"
 
 #: templates/imagestore/base.html:35
 msgid "Create new album"
-msgstr "Создать новый альбом"
+msgstr "Створити новий альбом"
 
 #: templates/imagestore/image-scope.html:14 templates/imagestore/image.html:18
 #: templates/imagestore/tag.html:7 templates/imagestore/tag.html.py:11
 #: templates/imagestore/tag.html:15
 msgid "Tag"
-msgstr "Метка"
+msgstr "Мітка"
 
 #: templates/imagestore/image.html:55
 msgid "previous image"
-msgstr "предыдущее изображение"
+msgstr "попередне зображення"
 
 #: templates/imagestore/image.html:58
 msgid "next image"
-msgstr "следующее изображение"
+msgstr "наступне зображення"
 
 #: templates/imagestore/image.html:68
 msgid "Edit info"
-msgstr "Редактировать информацию"
+msgstr "Редагувати інформацію"
 
 #: templates/imagestore/image.html:69
 msgid "Delete image"
-msgstr "Удалить изображение"
+msgstr "Видалити зображення"
 
 #: templates/imagestore/image_confirm_delete.html:6
 #: templates/imagestore/image_delete.html:6
 msgid "Are you sure that you would like to delete this image?"
-msgstr "Вы уверенны, что хотите удалить это изображение"
+msgstr "Ви впевнені, що хочете видалити це зображення"
 
 #: templates/imagestore/image_list.html:33
 #: templates/imagestore/forms/album_form.html:13
 #: templates/imagestore/forms/album_form.html:23
 msgid "Edit album"
-msgstr "Редактировать альбом"
+msgstr "Редагувати альбом"
 
 #: templates/imagestore/pagination.html:8
 msgid "previous page"
-msgstr "предыдущая страница"
+msgstr "попередня сторінка"
 
 #: templates/imagestore/pagination.html:22
 msgid "next page"
-msgstr "следующая страница"
+msgstr "наступна сторінка"
 
 #: templates/imagestore/forms/album_form.html:7
 #: templates/imagestore/forms/album_form.html:15
 #: templates/imagestore/forms/album_form.html:25
 msgid "Create album"
-msgstr "Создать альбом"
+msgstr "Створити альбом"
 
 #: templates/imagestore/forms/album_form.html:31
 msgid "Save"
-msgstr "Сохранить"
+msgstr "Зберегти"
 
 #: templates/imagestore/forms/image_form.html:30
 msgid "Upload"
-msgstr "Загрузить"
+msgstr "Завантажити"
 
 #~ msgid "Yes"
 #~ msgstr "Да"
