@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: imagestore\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-18 12:34+0400\n"
-"PO-Revision-Date: 2013-02-22 20:03+0000\n"
+"PO-Revision-Date: 2013-02-25 09:51+0000\n"
 "Last-Translator: jbo <oleg.dolya@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/imagestore/language/uk/)\n"
 "MIME-Version: 1.0\n"
@@ -98,7 +98,7 @@ msgstr "Ескіз"
 
 #: models.py:123 templates/imagestore/image.html:84
 msgid "Place"
-msgstr "Место"
+msgstr "Місце"
 
 #: models.py:131 models/upload.py:26
 msgid "images file (.zip)"
