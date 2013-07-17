@@ -52,5 +52,20 @@
 {% block content %}
 {% endblock content %}
 {% block content-related %}
-    {% block imagestore-related %}{% endblock %}
+        {% block imagestore-info %}
+        {% endblock %}
+        <div id="controls">
+            <ul>
+                {% if imagestore_perms.add_image or request.user.is_superuser %}
+                    <li><a href={% url imagestore:upload %}>{% trans "Upload image" %}</a></li>
+                {% endif %}
+                {% if imagestore_perms.add_album or request.user.is_superuser %}
+                    <li><a href={% url imagestore:create-album %}>{% trans "Create new album" %}</a></li>
+                {% endif %}
+                {% block controls %}
+                {% endblock controls %}
+            </ul>
+        </div>
+        {% block imagestore-related %}
+        {% endblock %}
 {% endblock %}

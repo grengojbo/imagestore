@@ -1,5 +1,6 @@
 {% extends "imagestore/base.html" %}
 {% load i18n thumbnail %}
+{% load url from future %}
 {% block imagestore-breadcrumb %}{% with "li" as scope_tag %}{% include "imagestore/image-scope.html" %}{% endwith %}{% endblock %}
 {% block title %}{% include "imagestore/image-scope.html" %}{% endblock %}
 {% block content %}
@@ -36,7 +37,7 @@
     {% include "imagestore/pagination.html" %}
 {% endblock %}
 {% block content-related %}{% if imagestore_perms.add_image or request.user.is_superuser %}
-<a href="{% url imagestore:upload %}" class="m-btn blue big">{% trans "Upload image" %} <i class="m-icon-big-swapdown m-icon-white"></a>
+<a href="{% url 'imagestore:upload' %}" class="m-btn blue big">{% trans "Upload image" %} <i class="m-icon-big-swapdown m-icon-white"></a>
     {% endif %}
 {% endblock %}
 

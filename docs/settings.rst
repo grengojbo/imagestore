@@ -30,6 +30,9 @@ IMAGESTORE_SHOW_USER (True)
     Default template expects that profile has avatar ImageField and get_absolute_url method
     You can customize view it by overriding `imagestore/user_info.html` template
 
+    Notice, that since imagestore version 2.7.4, which supports custom user model,
+    in `imagestore/user_info.html` passes `user` variable with current logged in user.
+
 IMAGE_MODEL ("imagestore.models.Image")
     Class for storing images. See :doc:`extending imagestore <extending>` for details.
 
@@ -44,3 +47,8 @@ IMAGESTORE_ALBUM_FORM ("imagestore.forms.AlbumForm")
 
 IMAGESTORE_LOAD_CSS ("True")
     Load CSS file 'static/imagestore.css' in imagestore templates. If you want to use custom theme - disable this settings.
+
+IMAGESTORE_UPLOAD_ALBUM_PROCESSOR ("imagestore.models.upload.process_zipfile")
+    Function for processing uploaded zip archives from admin interface. Function gets `AlbumUpload` model instance
+    and should process file from `zip_file` field to upload images. For example, you can override this setting
+    to provide function, which do nothing, and process file lately
