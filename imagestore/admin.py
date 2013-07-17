@@ -21,7 +21,7 @@ class AlbumAdmin(admin.ModelAdmin):
 admin.site.register(Album, AlbumAdmin)
 
 class ImageAdmin(admin.ModelAdmin):
-    fieldsets = ((None, {'fields': ['user', 'title', 'image', 'description', 'order', 'tags', 'album']}),)
+    fieldsets = ((None, {'fields': ['user', 'title', 'image', 'description', 'order', 'tags', 'album', 'views', 'links']}),)
     list_display = ('admin_thumbnail', 'user', 'order', 'album', 'title')
     raw_id_fields = ('user', )
     list_filter = ('album', )
