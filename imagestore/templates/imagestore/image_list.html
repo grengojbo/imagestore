@@ -21,11 +21,11 @@
                     <div class="m-btn-group">
                         <a href="#" class="m-btn disabled mini icn-only"><i class="icon-white icon-thumbs-up"></i></a>
                         <a href="#" class="m-btn disabled mini icn-only"><i class="icon-white icon-heart"></i></a>
-                        <a href="{% url imagestore:update-image image.id  %}" rel="tooltip" data-original-title="{% trans "Edit info" %}"
+                        <a href="{% url 'imagestore:update-image image.id'  %}" rel="tooltip" data-original-title="{% trans "Edit info" %}"
                            class="m-btn black btn-inverse mini icn-only"><i class="icon-white icon-share-alt"></i></a>
                     </div>
                     <div class="m-btn-group">
-                        <a href="{% url imagestore:delete-image image.id  %}" class="m-btn red mini icn-only"
+                        <a href="{% url 'imagestore:delete-image image.id'  %}" class="m-btn red mini icn-only"
                            rel="tooltip" data-content="And here's some amazing content. It's very engaging. right?"
                            title="{% trans "Delete image" %}"><i class="icon-white icon-remove"></i></a>
                     </div>
@@ -37,7 +37,7 @@
     {% include "imagestore/pagination.html" %}
 {% endblock %}
 {% block content-related %}{% if imagestore_perms.add_image or request.user.is_superuser %}
-<a href="{% url 'imagestore:upload' %}" class="m-btn blue big">{% trans "Upload image" %} <i class="m-icon-big-swapdown m-icon-white"></a>
+<a href="{% url 'imagestore:upload' %}" class="m-btn blue big">{% trans "Upload image" %} <i class="m-icon-big-swapdown m-icon-white"></i></a>
     {% endif %}
 {% endblock %}
 

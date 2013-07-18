@@ -1,12 +1,12 @@
 {% extends "imagestore/base.html" %}
-{% load i18n thumbnail bootstrap_tags %}
+{% load i18n thumbnail %}
 {% block title %}{% trans "Create album" %}{% endblock %}
 {% block imagestore-breadcrumb %}<li>{% if object %}{% trans "Edit album" %}: {{ object.name }}{% else %}{% trans "Create album" %}{% endif %}</li>{% endblock %}
 {% block content %}
     <form action="." method="post">{% csrf_token %}
         <legend>{% if object %}{% trans "Edit album" %}: {{ object.name }}{% else %}
             {% trans "Create album" %}{% endif %}</legend>
-        {{ form|as_bootstrap }}
+        {{ form }}
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
         </div>

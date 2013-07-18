@@ -1,5 +1,6 @@
 {% extends IMAGESTORE_TEMPLATE|default:"base.html" %}
 {% load i18n static %}
+{% load url from future %}
 {% block css %}<link rel="stylesheet" href="{% static 'css/prettyPhoto.css' %}" type="text/css" media="screen" charset="utf-8" />{% endblock %}
 {% block extrajs %}
 <!--
@@ -29,10 +30,10 @@
         <ul class="nav nav-list">
             <li class="nav-header">{% trans "Gallery" %}</li>
             {% if imagestore_perms.add_image or request.user.is_superuser %}
-                <li><a href={% url imagestore:upload %}>{% trans "Upload image" %}</a></li>
+                <li><a href={% url 'imagestore:upload' %}>{% trans "Upload image" %}</a></li>
             {% endif %}
             {% if imagestore_perms.add_album or request.user.is_superuser %}
-                <li><a href={% url imagestore:create-album %}>{% trans "Create new album" %}</a></li>
+                <li><a href={% url 'imagestore:create-album' %}>{% trans "Create new album" %}</a></li>
             {% endif %}
             {% block imagestore-info %}{% endblock %}
             {% block controls %}
@@ -57,10 +58,10 @@
         <div id="controls">
             <ul>
                 {% if imagestore_perms.add_image or request.user.is_superuser %}
-                    <li><a href={% url imagestore:upload %}>{% trans "Upload image" %}</a></li>
+                    <li><a href={% url 'imagestore:upload' %}>{% trans "Upload image" %}</a></li>
                 {% endif %}
                 {% if imagestore_perms.add_album or request.user.is_superuser %}
-                    <li><a href={% url imagestore:create-album %}>{% trans "Create new album" %}</a></li>
+                    <li><a href={% url 'imagestore:create-album' %}>{% trans "Create new album" %}</a></li>
                 {% endif %}
                 {% block controls %}
                 {% endblock controls %}
