@@ -1,5 +1,5 @@
 {% extends "imagestore/base.html" %}
-{% load i18n bootstrap_tags thumbnail static %}
+{% load i18n thumbnail static %}
 {% load url from future %}
 {% block title %}{% trans "Upload image" %}{% endblock %}
 {% block extrajs %}{{ block.super }}
@@ -15,7 +15,7 @@
 {% block content %}
     <form action="." method="post" enctype="multipart/form-data" class='upload-image'>{% csrf_token %}
         <legend>{% trans "Upload image" %}</legend>
-        {{ form|as_bootstrap }}
+        {{ form }}
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">{% trans "Upload" %}</button>
         </div>

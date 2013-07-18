@@ -1,6 +1,6 @@
 {% extends "imagestore/base.html" %}
-{% load i18n %}
-{% load thumbnail %}
+{% load i18n load thumbnail %}
+{% load url from future %}
 {% block title %}{% if view_user %}{% trans "Albums for user" %} {{ view_user.username }}{% else %}
     {% trans "All albums" %}{% endif %}{% endblock %}
 {% block imagestore-breadcrumb %}
@@ -41,11 +41,11 @@
                     <div class="m-btn-group">
                         <a href="#" class="m-btn disabled mini icn-only"><i class="icon-white icon-thumbs-up"></i></a>
                         <a href="#" class="m-btn disabled mini icn-only"><i class="icon-white icon-heart"></i></a>
-                        <a href="{% url imagestore:update-album pk=album.pk %}" rel="tooltip" data-original-title="{% trans "Edit album" %}"
+                        <a href="{% url 'imagestore:update-album pk=album.pk' %}" rel="tooltip" data-original-title="{% trans "Edit album" %}"
                            class="m-btn black btn-inverse mini icn-only"><i class="icon-white icon-share-alt"></i></a>
                     </div>
                     <div class="m-btn-group">
-                        <a href="{% url imagestore:delete-album album.id %}" class="m-btn red mini icn-only"
+                        <a href="{% url 'imagestore:delete-album album.id' %}" class="m-btn red mini icn-only"
                            rel="tooltip" data-content="And here's some amazing content. It's very engaging. right?"
                            title="Удалить альбом"><i class="icon-white icon-remove"></i></a>
                     </div>
@@ -57,6 +57,6 @@
     {% include "imagestore/pagination.html" %}
 {% endblock %}
 {% block content-related %}{% if imagestore_perms.add_album or request.user.is_superuser %}
-<a href="{% url imagestore:create-album %}" class="m-btn purple big">{% trans "Create new album" %} <i class="m-icon-big-swapright m-icon-white"></i></a>
+<a href="{% url 'imagestore:create-album' %}" class="m-btn purple big">{% trans "Create new album" %} <i class="m-icon-big-swapright m-icon-white"></i></a>
 {% endif %}
 {% endblock %}
