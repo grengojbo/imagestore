@@ -1,5 +1,5 @@
-#!/usr/bin/env python
-# vim:fileencoding=utf-8
+# -*- mode: python; coding: utf-8; -*-
+
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.conf import settings
 from utils import get_model_string
