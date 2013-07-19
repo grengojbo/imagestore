@@ -1,5 +1,5 @@
 {% extends "imagestore/base.html" %}
-{% load i18n load thumbnail %}
+{% load i18n thumbnail %}
 {% load url from future %}
 {% block title %}{% if view_user %}{% trans "Albums for user" %} {{ view_user.username }}{% else %}
     {% trans "All albums" %}{% endif %}{% endblock %}

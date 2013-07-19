@@ -1,5 +1,5 @@
-#!/usr/bin/env python
-# vim:fileencoding=utf-8
+# -*- mode: python; coding: utf-8; -*-
+
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.conf import settings
 from utils import get_model_string
@@ -16,7 +16,7 @@ def imagestore_processor(request):
         }
     try:
         ret['imagestore_index_url'] = reverse('imagestore:index')
-    except NoReverseMatch: #Bastard django-cms from hell!!!!111
+    except NoReverseMatch:  #Bastard django-cms from hell!!!!111
         pass
     if template:
         ret['IMAGESTORE_TEMPLATE'] = template
@@ -25,5 +25,3 @@ def imagestore_processor(request):
         'add_album': request.user.has_perm('%s.add_%s' % (album_applabel, album_classname)),
     }
     return ret
-
-  
