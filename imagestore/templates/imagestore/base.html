@@ -53,8 +53,6 @@
 {% block content %}
 {% endblock content %}
 {% block content-related %}
-        {% block imagestore-info %}
-        {% endblock %}
         <div id="controls">
             <ul>
                 {% if imagestore_perms.add_image or request.user.is_superuser %}
