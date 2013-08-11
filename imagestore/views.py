@@ -17,6 +17,7 @@ from tagging.models import TaggedItem
 from tagging.utils import get_tag
 from utils import load_class
 from django.db.models import Q
+from fiber.views import FiberPageMixin
 
 try:
     from django.contrib.auth import get_user_model
@@ -34,7 +35,7 @@ ImageForm = load_class(getattr(settings, 'IMAGESTORE_IMAGE_FORM', 'imagestore.fo
 AlbumForm = load_class(getattr(settings, 'IMAGESTORE_ALBUM_FORM', 'imagestore.forms.AlbumForm'))
 
 
-class AlbumListView(ListView):
+class AlbumListView(FiberPageMixin, ListView):
     context_object_name = 'album_list'
     template_name = 'imagestore/album_list.html'
     paginate_by = getattr(settings, 'IMAGESTORE_ALBUMS_ON_PAGE', 20)
@@ -53,6 +54,9 @@ class AlbumListView(ListView):
         context = super(AlbumListView, self).get_context_data(**kwargs)
         context.update(self.e_context)
         return context
+
+    def get_fiber_page_url(self):
+        return reverse('imagestore:index')
 
 
 def get_images_queryset(self):

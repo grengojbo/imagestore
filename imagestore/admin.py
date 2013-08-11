@@ -10,7 +10,9 @@ class InlineImageAdmin(AdminInlineImageMixin, admin.TabularInline):
     raw_id_fields = ('user', )
     extra = 0
 
+
 class AlbumAdmin(admin.ModelAdmin):
+    search_fields = ('name',)
     # TODO: добавить действие публиковать, отменить публикацию
     fieldsets = ((None, {'fields': ['name', 'user', 'is_public', 'order']}),)
     list_display = ('name', 'admin_thumbnail', 'user', 'created', 'updated', 'is_public', 'order')
@@ -20,15 +22,20 @@ class AlbumAdmin(admin.ModelAdmin):
 
 admin.site.register(Album, AlbumAdmin)
 
+
 class ImageAdmin(admin.ModelAdmin):
-    fieldsets = ((None, {'fields': ['user', 'title', 'image', 'description', 'order', 'tags', 'album', 'views', 'links']}),)
+    search_fields = ('title', 'album',)
+    fieldsets = ((None,
+                  {'fields': ['user', 'title', 'image', 'description', 'order', 'tags', 'album', 'views', 'links']}),)
     list_display = ('admin_thumbnail', 'user', 'order', 'album', 'title')
     raw_id_fields = ('user', )
     list_filter = ('album', )
 
+
 class AlbumUploadAdmin(admin.ModelAdmin):
     def has_change_permission(self, request, obj=None):
         return False
+
 
 IMAGE_MODEL = getattr(settings, 'IMAGESTORE_IMAGE_MODEL', None)
 if not IMAGE_MODEL:
