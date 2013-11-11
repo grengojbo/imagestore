@@ -41,11 +41,12 @@ class BaseImage(models.Model):
     description = models.TextField(_('Description'), blank=True, null=True)
     tags = TagField(_('Tags'), blank=True)
     order = models.IntegerField(_('Order'), default=0)
-    image = ImageField(verbose_name = _('File'), upload_to=get_file_path)
+    image = ImageField(verbose_name=_('File'), upload_to=get_file_path)
     user = models.ForeignKey(User, verbose_name=_('User'), null=True, blank=True, related_name='images')
     created = models.DateTimeField(_('Created'), auto_now_add=True, null=True)
     updated = models.DateTimeField(_('Updated'), auto_now=True, null=True)
-    album = models.ForeignKey(get_model_string('Album'), verbose_name=_('Album'), null=True, blank=True, related_name='images')
+    album = models.ForeignKey(get_model_string('Album'), verbose_name=_('Album'), null=True, blank=True,
+                              related_name='images')
     links = models.CharField(_('link name'), max_length=80, blank=True, null=True,)
     views = models.IntegerField(_('views'), default=0, blank=True, null=True,)
 
