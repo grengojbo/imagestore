@@ -27,6 +27,7 @@ except ImportError:
 from imagestore.utils import get_file_path, get_model_string
 
 SELF_MANAGE = getattr(settings, 'IMAGESTORE_SELF_MANAGE', True)
+IMG_SIZE = getattr(settings, 'IMAGESTORE_IMG_SIZE', {'1': {'small': '260x60', 'big': '800'}})
 
 
 class BaseImage(models.Model):
@@ -50,20 +51,40 @@ class BaseImage(models.Model):
     links = models.CharField(_('link name'), max_length=80, blank=True, null=True,)
     views = models.IntegerField(_('views'), default=0, blank=True, null=True,)
 
+    def image_small(self):
+        try:
+            return get_thumbnail(self.image, IMG_SIZE['1']['small'], quality=99).url
+        except IOError:
+            return 'IOError'
+        except ThumbnailError, ex:
+            return 'ThumbnailError, {0}'.format(ex.message)
+        except ImportError:
+            return False
+
+    def image_big(self):
+        try:
+            return get_thumbnail(self.image, IMG_SIZE['1']['big'], quality=99).url
+        except IOError:
+            return 'IOError'
+        except ThumbnailError, ex:
+            return 'ThumbnailError, {0}'.format(ex.message)
+        except ImportError:
+            return False
+
     @permalink
     def get_absolute_url(self):
         return 'imagestore:image', (), {'pk': self.id}
 
     def __unicode__(self):
-        return '%s'% self.id
+        return u'{0}'.format(self.id)
 
     def admin_thumbnail(self):
         try:
-            return '<img src="%s">' % get_thumbnail(self.image, '100x100', crop='center').url
+            return '<img src="{0}">'.format(get_thumbnail(self.image, '100x100', crop='center').url)
         except IOError:
             return 'IOError'
         except ThumbnailError, ex:
-            return 'ThumbnailError, %s' % ex.message
+            return 'ThumbnailError, {0}'.format(ex.message)
 
     admin_thumbnail.short_description = _('Thumbnail')
     admin_thumbnail.allow_tags = True

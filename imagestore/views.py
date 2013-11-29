@@ -18,6 +18,8 @@ from tagging.utils import get_tag
 from utils import load_class
 from django.db.models import Q
 from fiber.views import FiberPageMixin
+from rest_framework import generics, permissions
+from .serializers import AlbumSerializer, ImageSerializer
 
 try:
     from django.contrib.auth import get_user_model
@@ -33,6 +35,15 @@ IMAGESTORE_ON_PAGE = getattr(settings, 'IMAGESTORE_ON_PAGE', 20)
 
 ImageForm = load_class(getattr(settings, 'IMAGESTORE_IMAGE_FORM', 'imagestore.forms.ImageForm'))
 AlbumForm = load_class(getattr(settings, 'IMAGESTORE_ALBUM_FORM', 'imagestore.forms.AlbumForm'))
+
+
+class AlbumList(generics.ListAPIView):
+    model = Album
+    serializer_class = AlbumSerializer
+
+    def get_queryset(self):
+        queryset = super(AlbumList, self).get_queryset()
+        return queryset.filter(is_public=True).select_related('head')
 
 
 class AlbumListView(FiberPageMixin, ListView):
@@ -81,6 +92,15 @@ def get_images_queryset(self):
            (not self.request.user.has_perm('imagestore.moderate_albums')):
             raise PermissionDenied
     return images
+
+
+class ImageList(generics.ListAPIView):
+    model = Image
+    serializer_class = ImageSerializer
+
+    def get_queryset(self):
+        queryset = super(ImageList, self).get_queryset()
+        return queryset.filter(album=self.kwargs.get('pk'))
 
 
 class ImageListView(ListView):

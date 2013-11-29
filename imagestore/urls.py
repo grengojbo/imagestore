@@ -1,7 +1,8 @@
 # -*- mode: python; coding: utf-8; -*-
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url, include
 from tagging.models import Tag
-from views import AlbumListView, ImageListView, UpdateImage, UpdateAlbum, CreateImage, CreateAlbum, DeleteImage, DeleteAlbum, ImageView
+from .views import AlbumListView, ImageListView, UpdateImage, UpdateAlbum, CreateImage, CreateAlbum, DeleteImage
+from .views import ImageView, AlbumList, DeleteAlbum, ImageList
 
 #from fancy_autocomplete.views import AutocompleteSite
 #autocomletes = AutocompleteSite()
@@ -14,10 +15,20 @@ from views import AlbumListView, ImageListView, UpdateImage, UpdateAlbum, Create
 #    lookup='istartswith',
 #)
 
+album_urls = patterns('',
+    #url(r'^/(?P<pk>\d+)$', PhotoDetail.as_view(), name='photo-detail'),
+    url(r'^$', AlbumList.as_view(), name='api-album-list')
+)
+
+image_urls = patterns('',
+    #url(r'^/(?P<pk>\d+)$', PhotoDetail.as_view(), name='photo-detail'),
+    url(r'^(?P<pk>\d+)/$', ImageList.as_view(), name='api-image-list')
+)
 
 urlpatterns = patterns('imagestore.views',
                        url(r'^$', AlbumListView.as_view(), name='index'),
-
+                       url(r'^api/album/', include(album_urls)),
+                       url(r'^api/image/', include(image_urls)),
 
                        url(r'^album/add/$', CreateAlbum.as_view(), name='create-album'),
                        url(r'^album/(?P<album_id>\d+)/$', ImageListView.as_view(), name='album'),
