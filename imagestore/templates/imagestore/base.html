@@ -36,8 +36,6 @@
                 <li><a href={% url 'imagestore:create-album' %}>{% trans "Create new album" %}</a></li>
             {% endif %}
             {% block imagestore-info %}{% endblock %}
-            {% block controls %}
-            {% endblock controls %}
         </ul>
         {% include "imagestore/tag-cloud.html" %}
     </div><!--/.well -->
