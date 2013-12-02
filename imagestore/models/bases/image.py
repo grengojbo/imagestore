@@ -15,6 +15,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 try:
     from django.contrib.auth import get_user_model
+
     User = get_user_model()
 except ImportError:
     from django.contrib.auth.models import User
@@ -48,28 +49,8 @@ class BaseImage(models.Model):
     updated = models.DateTimeField(_('Updated'), auto_now=True, null=True)
     album = models.ForeignKey(get_model_string('Album'), verbose_name=_('Album'), null=True, blank=True,
                               related_name='images')
-    links = models.CharField(_('link name'), max_length=80, blank=True, null=True,)
-    views = models.IntegerField(_('views'), default=0, blank=True, null=True,)
-
-    def image_small(self):
-        try:
-            return get_thumbnail(self.image, IMG_SIZE['1']['small'], quality=99).url
-        except IOError:
-            return 'IOError'
-        except ThumbnailError, ex:
-            return 'ThumbnailError, {0}'.format(ex.message)
-        except ImportError:
-            return False
-
-    def image_big(self):
-        try:
-            return get_thumbnail(self.image, IMG_SIZE['1']['big'], quality=99).url
-        except IOError:
-            return 'IOError'
-        except ThumbnailError, ex:
-            return 'ThumbnailError, {0}'.format(ex.message)
-        except ImportError:
-            return False
+    links = models.CharField(_('link name'), max_length=80, blank=True, null=True, )
+    views = models.IntegerField(_('views'), default=0, blank=True, null=True, )
 
     @permalink
     def get_absolute_url(self):
@@ -92,33 +73,34 @@ class BaseImage(models.Model):
 
 #noinspection PyUnusedLocal
 def setup_imagestore_permissions(instance, created, **kwargs):
-        if not created:
-            return
-        try:
-            from imagestore.models import Album, Image
-            album_type = ContentType.objects.get(
-                #app_label=load_class('imagestore.models.Album')._meta.app_label,
-                app_label = Album._meta.app_label,
-                name='Album'
-            )
-            image_type = ContentType.objects.get(
-                #app_label=load_class('imagestore.models.Image')._meta.app_label,
-                app_label = Image._meta.app_label,
-                name='Image'
-            )
-            add_image_permission = Permission.objects.get(codename='add_image', content_type=image_type)
-            add_album_permission = Permission.objects.get(codename='add_album', content_type=album_type)
-            change_image_permission = Permission.objects.get(codename='change_image', content_type=image_type)
-            change_album_permission = Permission.objects.get(codename='change_album', content_type=album_type)
-            delete_image_permission = Permission.objects.get(codename='delete_image', content_type=image_type)
-            delete_album_permission = Permission.objects.get(codename='delete_album', content_type=album_type)
-            instance.user_permissions.add(add_image_permission, add_album_permission,)
-            instance.user_permissions.add(change_image_permission, change_album_permission,)
-            instance.user_permissions.add(delete_image_permission, delete_album_permission,)
-        except ObjectDoesNotExist:
-            # Permissions are not yet installed or conten does not created yet
-            # probaly this is first
-            pass
+    if not created:
+        return
+    try:
+        from imagestore.models import Album, Image
+
+        album_type = ContentType.objects.get(
+            #app_label=load_class('imagestore.models.Album')._meta.app_label,
+            app_label=Album._meta.app_label,
+            name='Album'
+        )
+        image_type = ContentType.objects.get(
+            #app_label=load_class('imagestore.models.Image')._meta.app_label,
+            app_label=Image._meta.app_label,
+            name='Image'
+        )
+        add_image_permission = Permission.objects.get(codename='add_image', content_type=image_type)
+        add_album_permission = Permission.objects.get(codename='add_album', content_type=album_type)
+        change_image_permission = Permission.objects.get(codename='change_image', content_type=image_type)
+        change_album_permission = Permission.objects.get(codename='change_album', content_type=album_type)
+        delete_image_permission = Permission.objects.get(codename='delete_image', content_type=image_type)
+        delete_album_permission = Permission.objects.get(codename='delete_album', content_type=album_type)
+        instance.user_permissions.add(add_image_permission, add_album_permission, )
+        instance.user_permissions.add(change_image_permission, change_album_permission, )
+        instance.user_permissions.add(delete_image_permission, delete_album_permission, )
+    except ObjectDoesNotExist:
+        # Permissions are not yet installed or conten does not created yet
+        # probaly this is first
+        pass
 
 
 if SELF_MANAGE:

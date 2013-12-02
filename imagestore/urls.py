@@ -16,19 +16,20 @@ from .views import ImageView, AlbumList, DeleteAlbum, ImageList
 #)
 
 album_urls = patterns('',
-    #url(r'^/(?P<pk>\d+)$', PhotoDetail.as_view(), name='photo-detail'),
-    url(r'^$', AlbumList.as_view(), name='api-album-list')
-)
+                      #url(r'^/(?P<pk>\d+)$', PhotoDetail.as_view(), name='photo-detail'),
+                      url(r'^(?P<pk>\d+)/size/(?P<size>\d+)/$', ImageList.as_view(), name='api-album-images'),
+                      url(r'^$', AlbumList.as_view(), name='api-album-list')
+                      )
 
-image_urls = patterns('',
-    #url(r'^/(?P<pk>\d+)$', PhotoDetail.as_view(), name='photo-detail'),
-    url(r'^(?P<pk>\d+)/$', ImageList.as_view(), name='api-image-list')
-)
+#image_urls = patterns('',
+#                      #url(r'^/(?P<pk>\d+)$', PhotoDetail.as_view(), name='photo-detail'),
+#                      url(r'^(?P<pk>\d+)/$', ImageList.as_view(), name='api-image-list')
+#)
 
 urlpatterns = patterns('imagestore.views',
                        url(r'^$', AlbumListView.as_view(), name='index'),
                        url(r'^api/album/', include(album_urls)),
-                       url(r'^api/image/', include(image_urls)),
+                       #url(r'^api/image/', include(image_urls)),
 
                        url(r'^album/add/$', CreateAlbum.as_view(), name='create-album'),
                        url(r'^album/(?P<album_id>\d+)/$', ImageListView.as_view(), name='album'),
