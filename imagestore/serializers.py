@@ -53,10 +53,10 @@ class ImageSerializer(serializers.ModelSerializer):
         return u"<img src='{0}'/>".format(self.get_image(obj))
 
     def get_image_big_src(self, obj):
-        return self.get_image(obj, rsize='bog')
+        return self.get_image(obj, rsize='big')
 
     def get_image_big(self, obj):
-        return u"<img src='{0}'/>".format(self.get_image(obj, rsize='bog'))
+        return u"<img src='{0}'/>".format(self.get_image(obj, rsize='big'))
 
     def get_image(self, obj, rsize='small'):
         view = self.context['view']
