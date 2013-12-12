@@ -34,6 +34,8 @@ class ImageSerializer(serializers.ModelSerializer):
     user = UserSerializer(required=False)
     image_small = serializers.SerializerMethodField('get_image_small')
     image_big = serializers.SerializerMethodField('get_image_big')
+    image_small_src = serializers.SerializerMethodField('get_image_small_src')
+    image_big_src = serializers.SerializerMethodField('get_image_big_src')
 
     #def transform_img(self, obj, value):
     #    return u'v='.format(value)
@@ -43,7 +45,7 @@ class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
         #fields = ('id', 'username', 'first_name', 'last_name', 'posts', )
-        fields = ('id', 'title', 'image', 'image_small', 'image_big', 'created', 'updated', 'album', 'views',
+        fields = ('id', 'title', 'image', 'image_small', 'image_big', 'image_small_src', 'image_big_src', 'created', 'updated', 'album', 'views',
                   'description', 'user')
 
     def get_image_small_src(self, obj):

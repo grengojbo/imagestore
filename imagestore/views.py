@@ -97,6 +97,7 @@ def get_images_queryset(self):
 class ImageList(generics.ListAPIView):
     model = Image
     serializer_class = ImageSerializer
+    # paginate_by = None
 
     def get_queryset(self):
         queryset = super(ImageList, self).get_queryset()
