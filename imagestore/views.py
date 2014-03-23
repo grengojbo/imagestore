@@ -95,13 +95,31 @@ def get_images_queryset(self):
 
 
 class ImageList(generics.ListAPIView):
+    """
+    /gallery/api/album/2/size/2/?limit=100&sort=-order
+    """
     model = Image
     serializer_class = ImageSerializer
     # paginate_by = None
 
     def get_queryset(self):
         queryset = super(ImageList, self).get_queryset()
-        return queryset.filter(album=self.kwargs.get('pk'))
+        # o = self.request.QUERY_PARAMS.get('sort', None)
+        o = self.request.GET.get('sort', None)
+        if o is not None:
+            return queryset.filter(album__id=self.kwargs.get('pk')).order_by(o)
+        else:
+            return queryset.filter(album__id=self.kwargs.get('pk'))
+        # return queryset.filter(album__id=self.kwargs.get('pk'))
+
+    def get_paginate_by(self):
+        """
+        Use smaller pagination for HTML representations.
+        """
+        return self.request.QUERY_PARAMS.get('limit', 20)
+        # if self.request.accepted_renderer.format == 'html':
+        #     return 20
+        # return 1
 
 
 class ImageListView(ListView):

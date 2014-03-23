@@ -45,8 +45,8 @@ class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
         #fields = ('id', 'username', 'first_name', 'last_name', 'posts', )
-        fields = ('id', 'title', 'image', 'image_small', 'image_big', 'image_small_src', 'image_big_src', 'created', 'updated', 'album', 'views',
-                  'description', 'user')
+        fields = ('id', 'title', 'image', 'image_small', 'image_big', 'image_small_src', 'image_big_src', 'created',
+                  'updated', 'album', 'views',  'description', 'user', 'order')
 
     def get_image_small_src(self, obj):
         return self.get_image(obj)
