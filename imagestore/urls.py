@@ -1,30 +1,10 @@
-# -*- mode: python; coding: utf-8; -*-
-from django.conf.urls import patterns, url, include
-from tagging.models import Tag
-from .views import AlbumListView, ImageListView, UpdateImage, UpdateAlbum, CreateImage, CreateAlbum, DeleteImage
-from .views import ImageView, AlbumList, DeleteAlbum, ImageList
+try:
+    from django.conf.urls import patterns, url
+except ImportError:
+    from django.conf.urls.defaults import patterns, url
+from .views import (AlbumListView, ImageListView, UpdateImage, UpdateAlbum, CreateImage, CreateAlbum, DeleteImage, \
+                   DeleteAlbum, ImageView)
 
-#from fancy_autocomplete.views import AutocompleteSite
-#autocomletes = AutocompleteSite()
-
-#autocomletes.register(
-#    'tag',
-#    queryset=Tag.objects.all(),
-#    search_fields=('name',),
-#    limit=10,
-#    lookup='istartswith',
-#)
-
-album_urls = patterns('',
-                      #url(r'^/(?P<pk>\d+)$', PhotoDetail.as_view(), name='photo-detail'),
-                      url(r'^(?P<pk>\d+)/size/(?P<size>\d+)/$', ImageList.as_view(), name='api-album-images'),
-                      url(r'^$', AlbumList.as_view(), name='api-album-list')
-                      )
-
-#image_urls = patterns('',
-#                      #url(r'^/(?P<pk>\d+)$', PhotoDetail.as_view(), name='photo-detail'),
-#                      url(r'^(?P<pk>\d+)/$', ImageList.as_view(), name='api-image-list')
-#)
 
 urlpatterns = patterns('imagestore.views',
                        url(r'^$', AlbumListView.as_view(), name='index'),
@@ -48,8 +28,6 @@ urlpatterns = patterns('imagestore.views',
                        url(r'^tag/(?P<tag>[^/]+)/image/(?P<pk>\d+)/$', ImageView.as_view(), name='image-tag'),
                        url(r'^image/(?P<pk>\d+)/delete/$', DeleteImage.as_view(), name='delete-image'),
                        url(r'^image/(?P<pk>\d+)/update/$', UpdateImage.as_view(), name='update-image'),
-
-                       #url(r'^autocomplete/(.*)/$', autocomletes, name='autocomplete')
                        )
 
 

@@ -1,10 +1,9 @@
 # -*- mode: python; coding: utf-8; -*-
+from __future__ import unicode_literals
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.utils.decorators import method_decorator
-from imagestore.models import Album, Image
-from imagestore.models import image_applabel, image_classname
-from imagestore.models import album_applabel, album_classname
+import swapper
 from django.shortcuts import get_object_or_404
 from django.http import Http404, HttpResponseRedirect
 from django.conf import settings
@@ -15,11 +14,17 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from tagging.models import TaggedItem
 from tagging.utils import get_tag
-from utils import load_class
+from .utils import load_class
 from django.db.models import Q
 from fiber.views import FiberPageMixin
 from rest_framework import generics, permissions
 from .serializers import AlbumSerializer, ImageSerializer
+
+Image = swapper.load_model('imagestore', 'Image')
+Album = swapper.load_model('imagestore', 'Album')
+
+image_applabel, image_classname = Image._meta.app_label, Image.__name__.lower()
+album_applabel, album_classname = Album._meta.app_label, Album.__name__.lower()
 
 try:
     from django.contrib.auth import get_user_model
