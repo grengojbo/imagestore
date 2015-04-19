@@ -1,23 +1,21 @@
 {% extends "imagestore/base.html" %}
-{% load i18n thumbnail static %}
+{% load i18n %}
+{% load thumbnail %}
 {% load url from future %}
-{% block title %}{% trans "Upload image" %}{% endblock %}
-{% block extrajs %}{{ block.super }}
-    <script src="{% static 'autocomplete.js' %}" type="text/javascript" charset="utf-8"></script>
-    <script>
-        $(function(){
-            completeField('#id_tags', '{% url "imagestore:autocomplete" "tag" %}');
-            completeField('#id_place_text', '{% url "imagestore:autocomplete" "place" %}');
-        })
-    </script>
+
+{% block title %}
+    {% trans "Upload image" %}
 {% endblock %}
-{% block imagestore-breadcrumb %}<li>{% trans "Upload image" %}</li>{% endblock %}
+
+{% block imagestore-breadcrumb %}
+    <li>{% trans "Upload image" %}</li>
+{% endblock %}
+
 {% block content %}
-    <form action="." method="post" enctype="multipart/form-data" class='upload-image'>{% csrf_token %}
-        <legend>{% trans "Upload image" %}</legend>
-        {{ form }}
-        <div class="form-actions">
-            <button type="submit" class="btn btn-primary">{% trans "Upload" %}</button>
-        </div>
+    <h1>{% trans "Upload image" %}</h1>
+    <form action="." method="post" enctype="multipart/form-data" class='upload-image'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="{% trans "Upload" %}" class='btn success'>
     </form>
 {% endblock content %}
