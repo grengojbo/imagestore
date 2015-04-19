@@ -4,7 +4,7 @@ __author__ = 'jbo'
 from rest_framework import serializers
 from .models.album import Album
 from .models.image import Image
-from profiles.serializers import UserSerializer
+# from profiles.serializers import UserSerializer
 from sorl.thumbnail import get_thumbnail
 from sorl.thumbnail.helpers import ThumbnailError
 from django.conf import settings
@@ -19,8 +19,8 @@ IMG_SIZE_DEF = {'small': '260x60', 'big': '800'}
 
 
 class AlbumSerializer(serializers.ModelSerializer):
-    user = UserSerializer(required=False)
-    head = serializers.HyperlinkedIdentityField('images', view_name='api-image-list', lookup_field='album')
+    # user = UserSerializer(required=False)
+    # head = serializers.HyperlinkedIdentityField('images', view_name='api-image-list', lookup_field='album')
     #posts = serializers.HyperlinkedIdentityField('posts', view_name='userpost-list', lookup_field='username')
     #gender = serializers.Field('profile.gender')
 
@@ -31,7 +31,7 @@ class AlbumSerializer(serializers.ModelSerializer):
 
 
 class ImageSerializer(serializers.ModelSerializer):
-    user = UserSerializer(required=False)
+    # user = UserSerializer(required=False)
     image_small = serializers.SerializerMethodField('get_image_small')
     image_big = serializers.SerializerMethodField('get_image_big')
     image_small_src = serializers.SerializerMethodField('get_image_small_src')

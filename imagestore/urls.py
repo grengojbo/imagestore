@@ -8,7 +8,7 @@ from .views import (AlbumListView, ImageListView, UpdateImage, UpdateAlbum, Crea
 
 urlpatterns = patterns('imagestore.views',
                        url(r'^$', AlbumListView.as_view(), name='index'),
-                       url(r'^api/album/', include(album_urls)),
+                       # url(r'^api/album/', include(album_urls)),
                        #url(r'^api/image/', include(image_urls)),
 
                        url(r'^album/add/$', CreateAlbum.as_view(), name='create-album'),
