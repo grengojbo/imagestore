@@ -1,9 +1,11 @@
-# -*- mode: python; coding: utf-8; -*-
-__author__ = 'zeus'
-
+# coding=utf-8
+from __future__ import unicode_literals
+import django
 from django.db import models
 from django.db.models import permalink
+from django.utils.encoding import python_2_unicode_compatible
 from sorl.thumbnail.helpers import ThumbnailError
+import swapper
 from tagging.fields import TagField
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
@@ -12,25 +14,19 @@ from django.contrib.auth.models import Permission
 from django.db.models.signals import post_save
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
+import logging
 
-try:
-    from django.contrib.auth import get_user_model
+logger = logging.getLogger(__name__)
 
-    User = get_user_model()
-except ImportError:
-    from django.contrib.auth.models import User
-
-try:
-    import Image as PILImage
-except ImportError:
-    from PIL import Image as PILImage
-
-from imagestore.utils import get_file_path, get_model_string
+from imagestore.utils import FilePathGenerator
+from imagestore.compat import get_user_model_name, get_user_model
+# from mezzanine.generic.fields import CommentsField
 
 SELF_MANAGE = getattr(settings, 'IMAGESTORE_SELF_MANAGE', True)
 IMG_SIZE = getattr(settings, 'IMAGESTORE_IMG_SIZE', {'1': {'small': '260x60', 'big': '800'}})
+UPLOAD_TO = getattr(settings, 'IMAGESTORE_UPLOAD_TO', 'imagestore/')
 
-
+@python_2_unicode_compatible
 class BaseImage(models.Model):
     class Meta(object):
         abstract = True
@@ -39,33 +35,38 @@ class BaseImage(models.Model):
             ('moderate_images', 'View, update and delete any image'),
         )
 
+    # title = models.CharField(_('Title'), max_length=255, blank=True, null=True)
     title = models.CharField(_('Title'), max_length=100, blank=True, null=True)
     description = models.TextField(_('Description'), blank=True, null=True)
     tags = TagField(_('Tags'), blank=True)
     order = models.IntegerField(_('Order'), default=0)
+    # image = ImageField(verbose_name=_('File'), max_length=255, upload_to=FilePathGenerator(to=UPLOAD_TO))
     image = ImageField(verbose_name=_('File'), upload_to=get_file_path)
-    user = models.ForeignKey(User, verbose_name=_('User'), null=True, blank=True, related_name='images')
+    user = models.ForeignKey(get_user_model_name(), verbose_name=_('User'), null=True, blank=True, related_name='images')
     created = models.DateTimeField(_('Created'), auto_now_add=True, null=True)
     updated = models.DateTimeField(_('Updated'), auto_now=True, null=True)
-    album = models.ForeignKey(get_model_string('Album'), verbose_name=_('Album'), null=True, blank=True,
-                              related_name='images')
+    album = models.ForeignKey(swapper.get_model_name('imagestore', 'Album'), verbose_name=_('Album'),
+                              null=True, blank=True, related_name='images')
     links = models.CharField(_('link name'), max_length=80, blank=True, null=True, )
     views = models.IntegerField(_('views'), default=0, blank=True, null=True, )
+
+    # comments = CommentsField(verbose_name=_("Comments"))
 
     @permalink
     def get_absolute_url(self):
         return 'imagestore:image', (), {'pk': self.id}
 
-    def __unicode__(self):
-        return u'{0}'.format(self.id)
+    def __str__(self):
+        return '%s' % self.id
 
     def admin_thumbnail(self):
         try:
-            return '<img src="{0}">'.format(get_thumbnail(self.image, '100x100', crop='center').url)
+            return '<img src="%s">' % get_thumbnail(self.image, '100x100', crop='center').url
         except IOError:
+            logger.exception('IOError for image %s', self.image)
             return 'IOError'
-        except ThumbnailError, ex:
-            return 'ThumbnailError, {0}'.format(ex.message)
+        except ThumbnailError as ex:
+            return 'ThumbnailError, %s' % ex.message
 
     admin_thumbnail.short_description = _('Thumbnail')
     admin_thumbnail.allow_tags = True
@@ -76,32 +77,27 @@ def setup_imagestore_permissions(instance, created, **kwargs):
     if not created:
         return
     try:
-        from imagestore.models import Album, Image
+        Album = swapper.load_model('imagestore', 'Album')
+        Image = swapper.load_model('imagestore', 'Image')
 
-        album_type = ContentType.objects.get(
-            #app_label=load_class('imagestore.models.Album')._meta.app_label,
-            app_label=Album._meta.app_label,
-            name='Album'
-        )
-        image_type = ContentType.objects.get(
-            #app_label=load_class('imagestore.models.Image')._meta.app_label,
-            app_label=Image._meta.app_label,
-            name='Image'
-        )
-        add_image_permission = Permission.objects.get(codename='add_image', content_type=image_type)
-        add_album_permission = Permission.objects.get(codename='add_album', content_type=album_type)
-        change_image_permission = Permission.objects.get(codename='change_image', content_type=image_type)
-        change_album_permission = Permission.objects.get(codename='change_album', content_type=album_type)
-        delete_image_permission = Permission.objects.get(codename='delete_image', content_type=image_type)
-        delete_album_permission = Permission.objects.get(codename='delete_album', content_type=album_type)
-        instance.user_permissions.add(add_image_permission, add_album_permission, )
-        instance.user_permissions.add(change_image_permission, change_album_permission, )
-        instance.user_permissions.add(delete_image_permission, delete_album_permission, )
+        perms = []
+
+        for model_class in [Album, Image]:
+            for perm_name in ['add', 'change', 'delete']:
+                app_label, model_name = model_class._meta.app_label, model_class.__name__.lower()
+                perm = Permission.objects.get_by_natural_key('%s_%s' % (perm_name, model_name), app_label, model_name)
+                perms.append(perm)
+
+        instance.user_permissions.add(*perms)
+
     except ObjectDoesNotExist:
-        # Permissions are not yet installed or conten does not created yet
+        # Permissions are not yet installed or content does not created yet
         # probaly this is first
         pass
 
 
 if SELF_MANAGE:
-    post_save.connect(setup_imagestore_permissions, User)
+    if django.VERSION[:2] >= (1, 7):
+        post_save.connect(setup_imagestore_permissions, get_user_model_name())
+    else:
+        post_save.connect(setup_imagestore_permissions, get_user_model())
